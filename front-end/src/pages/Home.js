@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import './Home.css';
 import Form from '../component/Form';
-import ReactModal from 'react-modal';
-/* import DatePicker from 'react-datepicker'; */
 import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addEmployee } from '../store/employeeSlice';
+import { format } from 'date-fns';
+import Modal from '@arthurpoignant/react-modal';
+
+localStorage.clear();
 
 const Home = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState(null);
   const [startDate, setStartDate] = useState(null);
+
+  const dispatch = useDispatch();
 
   const saveEmployee = () => {
     const firstName = document.getElementById('first-name').value;
@@ -20,21 +26,19 @@ const Home = () => {
     const zipCode = document.getElementById('zip-code').value;
     const department = document.getElementById('department').value;
 
-    const employees = JSON.parse(localStorage.getItem('employees')) || [];
     const employee = {
       firstName,
       lastName,
-      dateOfBirth,
-      startDate,
+      dateOfBirth: dateOfBirth ? format(dateOfBirth, 'MM/dd/yyyy') : '',
+      startDate: startDate ? format(startDate, 'MM/dd/yyyy') : '',
       department,
       street,
       city,
       state,
       zipCode
     };
-    employees.push(employee);
-    localStorage.setItem('employees', JSON.stringify(employees));
 
+    dispatch(addEmployee(employee));
     setModalIsOpen(true);
   };
 
@@ -54,13 +58,9 @@ const Home = () => {
         />
         <button onClick={saveEmployee}>Save</button>
       </div>
-      <ReactModal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        contentLabel="Employee Created"
-      >
-        Employee Created!
-      </ReactModal>
+      <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
+        <h1>Employee Created!</h1>
+      </Modal>
     </div>
   );
 };
