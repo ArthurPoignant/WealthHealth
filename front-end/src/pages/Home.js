@@ -8,9 +8,8 @@ import { addEmployee } from '../store/employeeSlice';
 import { format } from 'date-fns';
 import Modal from '@arthurpoignant/react-modal';
 
-localStorage.clear();
-
 const Home = () => {
+  localStorage.clear();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState(null);
   const [startDate, setStartDate] = useState(null);
@@ -18,13 +17,18 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const saveEmployee = () => {
-    const firstName = document.getElementById('first-name').value;
-    const lastName = document.getElementById('last-name').value;
-    const street = document.getElementById('street').value;
-    const city = document.getElementById('city').value;
-    const state = document.getElementById('state').value;
-    const zipCode = document.getElementById('zip-code').value;
-    const department = document.getElementById('department').value;
+    let firstName = document.getElementById('first-name').value;
+    let lastName = document.getElementById('last-name').value;
+    let street = document.getElementById('street').value;
+    let city = document.getElementById('city').value;
+    let state = document.getElementById('state').value;
+    let zipCode = document.getElementById('zip-code').value;
+    let department = document.getElementById('department').value;
+    
+    if (!firstName || !lastName || !dateOfBirth || !startDate || !street || !city || !state || !zipCode || !department) {
+      alert('Please fill out all fields');
+      return;
+    }
 
     const employee = {
       firstName,
@@ -40,6 +44,10 @@ const Home = () => {
 
     dispatch(addEmployee(employee));
     setModalIsOpen(true);
+
+    document.getElementById('employee-form').reset();
+    setDateOfBirth('');
+    setStartDate('');
   };
 
   return (

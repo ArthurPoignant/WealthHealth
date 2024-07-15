@@ -67,11 +67,11 @@ const states = [
 
 const Form = ({ dateOfBirth, setDateOfBirth, startDate, setStartDate }) => {
   return (
-    <form>
+    <form id='employee-form'>
       <label htmlFor="first-name">First Name</label>
-      <input type="text" id="first-name" placeholder="First Name" />
+      <input required type="text" id="first-name" placeholder="First Name" />
       <label htmlFor="last-name">Last Name</label>
-      <input type="text" id="last-name" placeholder="Last Name" />
+      <input required type="text" id="last-name" placeholder="Last Name" />
       <label htmlFor="date-of-birth">Date of Birth</label>
       <DatePicker
         selected={dateOfBirth}
@@ -100,10 +100,10 @@ const Form = ({ dateOfBirth, setDateOfBirth, startDate, setStartDate }) => {
         <legend>Address</legend>
 
         <label htmlFor="street">Street</label>
-        <input type="text" id="street" placeholder="Street" />
+        <input required type="text" id="street" placeholder="Street" />
 
         <label htmlFor="city">City</label>
-        <input type="text" id="city" placeholder="City" />
+        <input required type="text" id="city" placeholder="City" />
 
         <label htmlFor="state">State</label>
         <select id="state">
@@ -115,7 +115,7 @@ const Form = ({ dateOfBirth, setDateOfBirth, startDate, setStartDate }) => {
         </select>
 
         <label htmlFor="zip-code">Zip Code</label>
-        <input type="text" id="zip-code" placeholder="Zip Code" />
+        <input required type="text" id="zip-code" placeholder="Zip Code" />
       </fieldset>
     </form>
   );
