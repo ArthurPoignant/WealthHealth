@@ -9,7 +9,6 @@ import { format } from 'date-fns';
 import Modal from '@arthurpoignant/react-modal';
 
 const Home = () => {
-  localStorage.clear();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState(null);
   const [startDate, setStartDate] = useState(null);
