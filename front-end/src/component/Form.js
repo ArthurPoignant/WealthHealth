@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './Form.css'
 
+// List of U.S. states and territories with their abbreviations
 const states = [
   { name: 'Alabama', abbreviation: 'AL' },
   { name: 'Alaska', abbreviation: 'AK' },
@@ -65,6 +66,7 @@ const states = [
   { name: 'Wyoming', abbreviation: 'WY' },
 ];
 
+// Form component for capturing employee data
 const Form = ({ dateOfBirth, setDateOfBirth, startDate, setStartDate }) => {
   return (
     <form id='employee-form'>

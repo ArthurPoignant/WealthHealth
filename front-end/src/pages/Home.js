@@ -15,6 +15,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
+  // Retrieving the values of the form fields using the document.getElementById method.
   const saveEmployee = () => {
     let firstName = document.getElementById('first-name').value;
     let lastName = document.getElementById('last-name').value;
@@ -24,11 +25,14 @@ const Home = () => {
     let zipCode = document.getElementById('zip-code').value;
     let department = document.getElementById('department').value;
     
+    // Basic validation to ensure all fields are filled. If any field is missing, an alert is shown.
     if (!firstName || !lastName || !dateOfBirth || !startDate || !street || !city || !state || !zipCode || !department) {
       alert('Please fill out all fields');
       return;
     }
 
+    // Constructing an employee object with the form data.
+    // The format function is used to format the date of birth and start date to 'MM/dd/yyyy' format.
     const employee = {
       firstName,
       lastName,
@@ -41,9 +45,11 @@ const Home = () => {
       zipCode
     };
 
+    // Dispatching an action to add the employee to the Redux store.
     dispatch(addEmployee(employee));
     setModalIsOpen(true);
 
+    // Resetting the form and date states after the employee is created.
     document.getElementById('employee-form').reset();
     setDateOfBirth('');
     setStartDate('');

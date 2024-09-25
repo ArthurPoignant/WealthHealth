@@ -3,6 +3,8 @@ import DataTable from 'react-data-table-component';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
 
+// Define the columns for the DataTable, specifying the data field for each column,
+// whether it's sortable, and the format for date fields.
 const columns = [
   { name: 'First Name', selector: row => row.firstName, sortable: true },
   { name: 'Last Name', selector: row => row.lastName, sortable: true },
@@ -15,8 +17,12 @@ const columns = [
   { name: 'Zip Code', selector: row => row.zipCode, sortable: true },
 ];
 
+// Define the List component that will display the table of employees
 const List = () => {
+  // Retrieve the list of employees from the Redux store using the useSelector hook
   const employees = useSelector(state => state.employee.employees);
+
+  // Format the employee data to display properly formatted dates for dateOfBirth and startDate fields
   const formattedEmployees = employees.map(employee => ({
     ...employee,
     dateOfBirth: employee.dateOfBirth ? format(new Date(employee.dateOfBirth), 'MM/dd/yyyy') : '',
